@@ -2,37 +2,18 @@ using System;
 
 class Punto
 {
-    public decimal X { get; set; }
-    public decimal Y { get; set; }
-    public decimal Z { get; set; }
+    public decimal x { get; set; }
+    public decimal y { get; set; }
 
     public Punto(decimal x, decimal y)
     {
-        X = x;
-        Y = y;
-        Z = 0; 
+        this.x = x;
+        this.y = y;
     }
 
-    public Punto(decimal x, decimal y, decimal z)
+    public double MedirDistancia(Punto puntoDestino)
     {
-        X = x;
-        Y = y;
-        Z = z;
-    }
-
-    public double MedirDistancia(Punto destino)
-    {
-        double distancia;
-
-        if (Z == 0 && destino.Z == 0)
-        {
-            distancia = Math.Sqrt(Math.Pow((double)(destino.X - X), 2) + Math.Pow((double)(destino.Y - Y), 2));
-        }
-        else 
-        {
-            distancia = Math.Sqrt(Math.Pow((double)(destino.X - X), 2) + Math.Pow((double)(destino.Y - Y), 2) + Math.Pow((double)(destino.Z - Z), 2));
-        }
-
+        double distancia = Math.Sqrt(Math.Pow((double)(puntoDestino.x - this.x), 2) + Math.Pow((double)(puntoDestino.y - this.y), 2));
         return distancia;
     }
 }
@@ -41,19 +22,11 @@ class Program
 {
     static void Main()
     {
-        Punto puntoOrigen2D = new Punto(0, 0);
-        Punto puntoDestino2D = new Punto(3, 4);
+        Punto puntoOrigen = new Punto(120M, 30M);
+        Punto puntoDestino = new Punto(72M, 80M);
 
-        double distancia2D = puntoOrigen2D.MedirDistancia(puntoDestino2D);
+        double distancia = puntoOrigen.MedirDistancia(puntoDestino);
 
-        Console.WriteLine("Distancia en 2D: " + distancia2D);
-
-        Punto puntoOrigen3D = new Punto(1, 2, 3);
-        Punto puntoDestino3D = new Punto(4, 5, 6);
-
-        double distancia3D = puntoOrigen3D.MedirDistancia(puntoDestino3D);
-
-        Console.WriteLine("Distancia en 3D: " + distancia3D);
+        Console.WriteLine($"La distancia entre dos puntos es: {distancia}");
     }
 }
-
